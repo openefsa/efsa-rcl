@@ -160,6 +160,16 @@ public class Relation {
 		row.put(prefForeignKey, parent.get(prefForeignKey));
 	}
 
+	public static void injectParents(TableRow child, TableRow... parents) {
+		if (parents == null || parents.length < 1) {
+			return;
+		}
+
+		for (TableRow parent: parents) {
+			injectParent(parent, child);
+		}
+	}
+
 	/**
 	 * Inject the foreign key of a global parent to the {@code row} the global
 	 * parent is loaded from the .xlsx file using the {@code parentTableName} field
