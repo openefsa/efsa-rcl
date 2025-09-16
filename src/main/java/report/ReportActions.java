@@ -262,6 +262,13 @@ public abstract class ReportActions {
 	public abstract boolean askConfirmation(ReportAction action);
 
 	/**
+	 * Ask to the user confirmation for Bulk Ammendement of an existing dataset.
+	 * 
+	 * @return
+	 */
+	public abstract boolean askBulkAmendmentConfirmation();
+
+	/**
 	 * Ask confirmation for replacing an existing dataset with a send operation
 	 * 
 	 * @param sendOp

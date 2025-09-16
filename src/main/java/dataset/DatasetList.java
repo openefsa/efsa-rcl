@@ -73,7 +73,7 @@ public class DatasetList extends ArrayList<IDataset> implements IDcfDatasetsList
 			if (senderId == null)
 				continue;
 
-			if (senderId.matches(regex))
+			if (senderId.matches(regex) || senderId.startsWith(regex))
 				filteredList.add(dataset);
 		}
 

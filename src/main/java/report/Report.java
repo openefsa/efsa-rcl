@@ -2,6 +2,8 @@ package report;
 
 import app_config.AppPaths;
 import dataset.RCLDatasetStatus;
+import java.util.Objects;
+import java.util.Optional;
 import providers.ITableDaoService;
 import table_database.TableDao;
 import table_skeleton.TableRow;
@@ -89,7 +91,8 @@ public abstract class Report extends TableRow implements EFSAReport {
 	}
 
 	public String getSenderId() {
-		return this.getCode(AppPaths.REPORT_SENDER_ID);
+		String str = getCode(AppPaths.REPORT_SENDER_ID);
+		return Objects.isNull(str) ? str : str.trim();
 	}
 
 	public void setSenderId(String id) {
@@ -106,9 +109,13 @@ public abstract class Report extends TableRow implements EFSAReport {
 		return RCLDatasetStatus.fromString(status);
 	}
 
-	public void setStatus(String status) {
+	public void setRCLStatus(String status) {
 		this.put(AppPaths.REPORT_PREVIOUS_STATUS, this.getRCLStatus().getStatus());
 		this.put(AppPaths.REPORT_STATUS, status);
+	}
+
+	public boolean isVisible() {
+		return ReportType.SIMPLE_MONTHLY.equals(getType());
 	}
 
 	/**
@@ -125,8 +132,8 @@ public abstract class Report extends TableRow implements EFSAReport {
 		return RCLDatasetStatus.fromString(status);
 	}
 
-	public void setStatus(RCLDatasetStatus status) {
-		this.setStatus(status.getStatus());
+	public void setRCLStatus(RCLDatasetStatus status) {
+		this.setRCLStatus(status.getStatus());
 	}
 
 	public String getYear() {
@@ -149,7 +156,7 @@ public abstract class Report extends TableRow implements EFSAReport {
 	 * Force the report to be editable
 	 */
 	public void makeEditable() {
-		this.setStatus(RCLDatasetStatus.DRAFT);
+		this.setRCLStatus(RCLDatasetStatus.DRAFT);
 	}
 
 	/**
@@ -185,6 +192,39 @@ public abstract class Report extends TableRow implements EFSAReport {
 	public static TableRowList getAllVersions(String senderId) {
 		TableDao dao = new TableDao();
 		return dao.getByStringField(TableSchemaList.getByName(AppPaths.REPORT_SHEET), AppPaths.REPORT_SENDER_ID, senderId);
+	}
+
+	public void setAggregatorId(Integer aggregatorId) {
+		this.put(AppPaths.REPORT_AGGREGATOR_ID, Objects.isNull(aggregatorId) ? "" : String.valueOf(aggregatorId));
+	}
+
+	public Integer getAggregatorId() {
+		return Optional.<String>ofNullable(getCode(AppPaths.REPORT_AGGREGATOR_ID))
+			.map(String::trim)
+			.filter(id -> Boolean.FALSE.equals(Boolean.valueOf(id.isEmpty())))
+	    	.map(Integer::parseInt)
+	    	.orElse(null);
+	}
+
+	public boolean isAggregated() {
+		return Objects.nonNull(getAggregatorId());
+	}
+
+	public void setDcCode(String dcCode) {
+	  	this.put(AppPaths.REPORT_DC_CODE, dcCode);
+	}
+
+	public String getDcCode() {
+	  	return getCode(AppPaths.REPORT_DC_CODE);
+	}
+
+	public void setType(ReportType type) {
+	  	String val = (Objects.nonNull(type) ? type : ReportType.SIMPLE_MONTHLY).name();
+	  	this.put(AppPaths.REPORT_TYPE, val);
+	}
+
+	public ReportType getType() {
+	  	return ReportType.getOrDefault(getCode(AppPaths.REPORT_TYPE));
 	}
 
 	/**

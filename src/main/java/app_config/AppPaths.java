@@ -40,6 +40,9 @@ public class AppPaths {
 
 	public static final String REPORT_SHEET = "Report";
 	public static final String REPORT_YEAR_COL = "reportYear";
+	public static final String REPORT_TYPE = "type";
+	public static final String REPORT_AGGREGATOR_ID = "aggregatorId";
+	public static final String REPORT_DC_CODE = "dcCode";
 	public static final String REPORT_MONTH_COL = "reportMonth";
 	public static final String REPORT_SENDER_ID = "reportSenderId";
 	public static final String REPORT_MESSAGE_ID = "reportMessageId";
@@ -50,5 +53,6 @@ public class AppPaths {
 	public static final String REPORT_STATUS = "reportStatus";
 	public static final String REPORT_PREVIOUS_STATUS = "reportPreviousStatus";
 	public static final String REPORT_VERSION = "reportVersion";
+	public static final String REPORT_COUNTRY = "country";
 	public static final String REPORT_VERSION_REGEX = "(\\.\\d{2})?";  // either .01, .02 or .10, .50 (always two digits)
 }

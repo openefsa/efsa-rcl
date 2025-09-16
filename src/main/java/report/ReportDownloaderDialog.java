@@ -79,7 +79,7 @@ public abstract class ReportDownloaderDialog {
 		// select the data collection
 		IDcfDataCollectionsList<IDcfDataCollection> list;
 		try {
-			list = getAvailableDcList();
+			list = GetAvailableDataCollections.getAvailableDcList();
 		} catch(DetailedSOAPException e) {
 			shell.setCursor(shell.getDisplay().getSystemCursor(SWT.CURSOR_ARROW));
 			throw e;
@@ -92,8 +92,8 @@ public abstract class ReportDownloaderDialog {
 			return;
 		}
 		
-		IDataCollectionsDialog dcDialog = getDataCollectionsDialog(shell, list);
-		IDcfDataCollection selectedDc = dcDialog.open();
+		IDataCollectionsDialog dcDialog = getDataCollectionsDialog(shell, list, Messages.get("dc.dialog.button"));
+		IDcfDataCollection selectedDc = dcDialog.open(Messages.get("dc.dialog.title"));
 		if (selectedDc == null)
 			return;
 		
@@ -229,7 +229,7 @@ public abstract class ReportDownloaderDialog {
 	 * @return
 	 */
 	public abstract IDataCollectionsDialog getDataCollectionsDialog(Shell shell, 
-			IDcfDataCollectionsList<IDcfDataCollection> list);
+			IDcfDataCollectionsList<IDcfDataCollection> list, String buttonTextKey);
 	
 	/**
 	 * Get the dialog which should be shown to select the dataset to download.

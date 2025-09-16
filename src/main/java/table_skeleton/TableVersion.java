@@ -30,7 +30,7 @@ public class TableVersion {
 		if (version == null || version.isEmpty())
 			return 0;
 		
-		return Integer.valueOf(version);
+		return Integer.parseInt(version);
 	}
 	
 	public static String getPreviousVersion(String versionCode) {
@@ -45,7 +45,7 @@ public class TableVersion {
 		try {
 			
 			// get the current version (integer)
-			int versionNumber = Integer.valueOf(versionCode);
+			int versionNumber = Integer.parseInt(versionCode);
 			
 			// increase the version number by 1
 			versionNumber--;
@@ -87,7 +87,7 @@ public class TableVersion {
 		try {
 			
 			// get the current version (integer)
-			int versionNumber = Integer.valueOf(versionCode);
+			int versionNumber = Integer.parseInt(versionCode);
 			
 			// increase the version number by 1
 			versionNumber++;

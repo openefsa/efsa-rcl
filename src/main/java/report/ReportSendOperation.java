@@ -6,8 +6,8 @@ import message_creator.OperationType;
 
 public class ReportSendOperation {
 	
-	private Dataset dataset;
-	private OperationType opType;
+	private final Dataset dataset;
+	private final OperationType opType;
 
 	public ReportSendOperation(Dataset dataset, OperationType opType) {
 		this.dataset = dataset;

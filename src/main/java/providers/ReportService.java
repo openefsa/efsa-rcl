@@ -251,7 +251,7 @@ public class ReportService implements IReportService {
 		}
 
 		if (newStatus != null) {
-			report.setStatus(newStatus);
+			report.setRCLStatus(newStatus);
 			daoService.update(report);
 		}
 
