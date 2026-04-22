@@ -47,6 +47,10 @@ public interface EFSAReport extends IDataset {
 	 */
 	public void setId(String id);
 
+	void setRCLStatus(String var1);
+
+	void setRCLStatus(RCLDatasetStatus var1);
+	
 	/**
 	 * Get the current version of the report
 	 * @return

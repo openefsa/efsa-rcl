@@ -244,5 +244,7 @@ public interface IReportService {
 	 * @return
 	 */
 	public DisplayAckResult displayAck(EFSAReport report);
+	
+	TableRowList getAllReports();
 
 }

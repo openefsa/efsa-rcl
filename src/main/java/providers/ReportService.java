@@ -1064,4 +1064,8 @@ public class ReportService implements IReportService {
 
 	}
 
+	@Override
+	public TableRowList getAllReports() {
+		return this.daoService.getAll(TableSchemaList.getByName("Report"));
+	}
 }

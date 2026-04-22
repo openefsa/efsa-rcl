@@ -1,5 +1,8 @@
 package report;
 
+import java.util.Objects;
+import java.util.Optional;
+
 import app_config.AppPaths;
 import dataset.RCLDatasetStatus;
 import providers.ITableDaoService;
@@ -35,6 +38,11 @@ public abstract class Report extends TableRow implements EFSAReport {
 
 	public void setMessageId(String id) {
 		this.put(AppPaths.REPORT_MESSAGE_ID, id);
+	}
+	
+	public void setType(ReportType type) {
+	      String val = (Objects.nonNull(type) ? type : ReportType.SIMPLE_MONTHLY).name();
+	      this.put("type", val);
 	}
 
 	@Override
@@ -106,6 +114,17 @@ public abstract class Report extends TableRow implements EFSAReport {
 		return RCLDatasetStatus.fromString(status);
 	}
 
+	@Override
+	public void setRCLStatus(RCLDatasetStatus status) {
+		this.setRCLStatus(status.getStatus());
+	}
+	
+	@Override
+	public void setRCLStatus(String status) {
+		this.put("reportPreviousStatus", this.getRCLStatus().getStatus());
+		this.put("reportStatus", status);
+	}
+	
 	public void setStatus(String status) {
 		this.put(AppPaths.REPORT_PREVIOUS_STATUS, this.getRCLStatus().getStatus());
 		this.put(AppPaths.REPORT_STATUS, status);
@@ -194,4 +213,33 @@ public abstract class Report extends TableRow implements EFSAReport {
 	 * @return
 	 */
 	public abstract String getRowIdFieldName();
+	
+	public Integer getAggregatorId() {
+		return Optional.ofNullable(this.getCode("aggregatorId")).map(String::trim)
+				.filter(id -> Boolean.FALSE.equals(id.isEmpty())).map(Integer::parseInt).orElse(null);
+	}
+
+	public void setAggregatorId(Integer aggregatorId) {
+		this.put("aggregatorId", Objects.isNull(aggregatorId) ? "" : String.valueOf(aggregatorId));
+	}
+
+	public boolean isAggregated() {
+		return Objects.nonNull(this.getAggregatorId());
+	}
+	
+	public void setDcCode(String dcCode) {
+		this.put("dcCode", dcCode);
+	}
+
+	public String getDcCode() {
+		return this.getCode("dcCode"); // TODO: controllare il campo dcCode perchè non viene letto.
+	}
+	
+	public ReportType getType() {
+		return ReportType.getOrDefault(this.getCode("type"));
+	}
+
+	public boolean isVisible() {
+		return ReportType.SIMPLE_MONTHLY.equals(this.getType());
+	}
 }

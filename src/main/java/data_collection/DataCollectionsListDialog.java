@@ -38,6 +38,11 @@ public class DataCollectionsListDialog extends Dialog implements IDataCollection
 	public DataCollectionsListDialog(Shell parent, IDcfDataCollectionsList<IDcfDataCollection> list) {
 		this(parent, list, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	}
+	
+	public DataCollectionsListDialog(Shell parent, IDcfDataCollectionsList<IDcfDataCollection> list, int style, String buttonTextKey) {
+	      super(parent, style);
+	      this.list = list;
+	}
 
 	protected void createContents(Shell shell) {
 		
@@ -128,4 +133,24 @@ public class DataCollectionsListDialog extends Dialog implements IDataCollection
 		
 		return selectedDc;
 	}
+	
+	@Override
+	   public IDcfDataCollection open(String titleKey) {
+	      Shell shell = new Shell(this.getParent(), 66800);
+	      shell.setLayout(new GridLayout(1, false));
+	      shell.setLayoutData(new GridData(16777216, 16777216, true, false));
+	      shell.setText(Messages.get(titleKey));
+	      shell.setImage(this.getParent().getImage());
+	      this.createContents(shell);
+	      shell.open();
+	      Display display = this.getParent().getDisplay();
+
+	      while (!shell.isDisposed()) {
+	         if (!display.readAndDispatch()) {
+	            display.sleep();
+	         }
+	      }
+
+	      return this.selectedDc;
+	   }
 }

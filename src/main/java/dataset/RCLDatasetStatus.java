@@ -1,5 +1,7 @@
 package dataset;
 
+import java.util.Arrays;
+
 import i18n_messages.Messages;
 
 /**
@@ -278,5 +280,9 @@ public enum RCLDatasetStatus {
 	@Override
 	public String toString() {
 		return this.getLabel();
+	}
+	
+	public boolean isFinalized() {
+		return Arrays.asList(ACCEPTED_DWH, REJECTED, REJECTED_EDITABLE).contains(this);
 	}
 }

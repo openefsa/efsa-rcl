@@ -51,4 +51,5 @@ public class AppPaths {
 	public static final String REPORT_PREVIOUS_STATUS = "reportPreviousStatus";
 	public static final String REPORT_VERSION = "reportVersion";
 	public static final String REPORT_VERSION_REGEX = "(\\.\\d{2})?";  // either .01, .02 or .10, .50 (always two digits)
+	public static final String REPORT_DC_CODE = "dcCode";
 }

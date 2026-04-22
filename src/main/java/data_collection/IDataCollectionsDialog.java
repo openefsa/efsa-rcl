@@ -6,4 +6,5 @@ public interface IDataCollectionsDialog {
 	 * @return
 	 */
 	public IDcfDataCollection open();
+	public IDcfDataCollection open(String var1);
 }

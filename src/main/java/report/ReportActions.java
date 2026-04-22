@@ -269,6 +269,8 @@ public abstract class ReportActions {
 	 */
 	public abstract boolean askReplaceConfirmation(Dataset status);
 
+	public abstract boolean askBulkAmendmentConfirmation();
+	
 	/**
 	 * Called if an exception occurred
 	 * 

@@ -2,6 +2,7 @@ package table_skeleton;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import table_database.TableDao;
 import xlsx_reader.TableSchema;
@@ -19,9 +20,11 @@ public class TableRowList extends ArrayList<TableRow> {
 	public TableRowList() {
 	}
 	
-	public TableRowList(Collection<TableRow> rows) {
+	public TableRowList(Collection<? extends TableRow> rows) {
 		super(rows);
 	}
+	
+	
 	
 	/**
 	 * List of table rows. Note that all the table rows should follow the same TableSchema!

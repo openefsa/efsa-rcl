@@ -96,4 +96,6 @@ public interface ITableDaoService {
 	 * @return
 	 */
 	public boolean deleteByStringField(TableSchema schema, String fieldName, String value);
+
+	boolean delete(TableRow var1);
 }

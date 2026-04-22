@@ -119,6 +119,7 @@ public abstract class ReportImporter {
 		populatedDataset.setLastMessageId(dataset.getLastMessageId());
 		populatedDataset.setLastModifyingMessageId(dataset.getLastModifyingMessageId());
 		populatedDataset.setLastValidationMessageId(dataset.getLastValidationMessageId());
+	
 
 		return populatedDataset;
 	}

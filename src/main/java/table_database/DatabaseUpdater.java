@@ -2,6 +2,9 @@ package table_database;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.logging.log4j.LogManager;
@@ -81,7 +84,7 @@ public class DatabaseUpdater {
 	 * @throws SQLException
 	 */
 	private void addAndUpdateColumns(TableSchema oldTable, TableSchema newTable) throws IOException, SQLException {
-
+		
 		// for each column defined in the table
 		for (TableColumn newCol : newTable) {
 
