@@ -127,6 +127,11 @@ public class Warnings {
 			message = Messages.get("send.message.failed");
 			code = "ERR104";
 			break;
+		case SERVER_ERROR:
+			title = Messages.get("error.title");
+			message = Messages.get("internal.server.err", e.getMessage(),PropertiesReader.getSupportEmail());
+			code = "ERR500";
+			break;
 		default:
 			break;
 		}
